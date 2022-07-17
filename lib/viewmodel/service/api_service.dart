@@ -6,7 +6,7 @@ import 'package:PostNews/model/news.dart';
 class ApiService {
   late String _category;
   String _country = "id";
-  String _apiKey2 = "2321d66b033643c59f2179c5a077da24";
+  String _apiKey2 = "3579f938d5c04ea8823b8ec1992eda65";
   String _baseUrl = "https://newsapi.org/v2/";
 
   List<News> parseNews(String responseBody) {

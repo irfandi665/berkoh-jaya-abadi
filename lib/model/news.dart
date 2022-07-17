@@ -8,28 +8,25 @@ class News {
   String source;
 
   News(
-    {
-       required this.author, 
-       required this.title, 
-       required this.image, 
-      required this.published, 
+      {required this.author,
+      required this.title,
+      required this.image,
+      required this.published,
       required this.content,
       required this.url,
-       required this.source
-    }
-  );
+      required this.source});
 
   factory News.fromJson(Map<String, dynamic> json) {
-    var imageUrl = "https://idtechsolusi.co.id/assets/img/no-image.png";
+    var imageUrl =
+        "https://www.adobe.com/express/feature/image/convert/jpg-to-png/media_1b0ad89a4a5ad233f5708e21b5998d6638cb07929.png?width=750&format=png&optimize=medium";
     return News(
-      author : json['author'] == null ? "" : json['author'],
-      title : json['title'] == null ? "" : json['title'],
-      image : json['urlToImage'] == null ? imageUrl : json['urlToImage'],
-      published : json['publishedAt'] == null ? "" : json['publishedAt'],
-      content : json['content'] == null ? "" : json['content'],
-      url: json['url'] == null ? "" : json['url'],
-      source: json['source']['name']
-    );
+        author: json['author'] == null ? "" : json['author'],
+        title: json['title'] == null ? "" : json['title'],
+        image: json['urlToImage'] == null ? imageUrl : json['urlToImage'],
+        published: json['publishedAt'] == null ? "" : json['publishedAt'],
+        content: json['content'] == null ? "" : json['content'],
+        url: json['url'] == null ? "" : json['url'],
+        source: json['source']['name']);
   }
 }
 

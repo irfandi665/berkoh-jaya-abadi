@@ -78,7 +78,7 @@ class _BerandaState extends State<Beranda> {
                       color: currentTab == 1 ? Colors.red : Colors.grey,
                     ),
                     Text(
-                      "Articles",
+                      "Tambah Data",
                       style: TextStyle(
                           color: currentTab == 1 ? Colors.red : Colors.grey),
                     )

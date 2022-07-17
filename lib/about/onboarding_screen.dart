@@ -1,5 +1,6 @@
 import 'package:PostNews/about/onboarding_contents.dart';
 import 'package:PostNews/about/size_config.dart';
+import 'package:PostNews/view/beranda.dart';
 import 'package:PostNews/view/home.dart';
 import 'package:PostNews/view/splash.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +118,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Home()),
+                                MaterialPageRoute(
+                                    builder: (context) => Beranda()),
                               );
                             },
                             child: Text("START"),
@@ -143,7 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  _controller.jumpToPage(3);
+                                  _controller.jumpToPage(2);
                                 },
                                 child: Text(
                                   "SKIP",

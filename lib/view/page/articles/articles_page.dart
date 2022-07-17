@@ -13,9 +13,6 @@ class ArticlesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    CollectionReference _articles = _firestore.collection('articles');
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
