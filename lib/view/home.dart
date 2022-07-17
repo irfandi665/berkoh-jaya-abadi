@@ -7,6 +7,7 @@ import 'package:PostNews/view/page/general/generalNews.dart';
 import 'package:PostNews/view/page/health/healthNews.dart';
 import 'package:PostNews/view/page/sport/sportNews.dart';
 import 'package:PostNews/view/page/technology/technologyNews.dart';
+import 'package:PostNews/about/onboarding_screen.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -127,7 +128,13 @@ class _HomeState extends State<Home> {
                 Container(
                   margin: EdgeInsets.only(right: 0),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OnboardingScreen()),
+                        );
+                      },
                       icon: Image.asset('images/icon_user.png')),
                 )
               ],

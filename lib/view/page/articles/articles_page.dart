@@ -1,3 +1,5 @@
+import 'package:PostNews/about/onboarding_screen.dart';
+import 'package:PostNews/crud/homePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:PostNews/view/drawer.dart';
@@ -28,146 +30,18 @@ class ArticlesPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 0),
             child: IconButton(
-                onPressed: () {}, icon: Image.asset('images/icon_user.png')),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => OnboardingScreen()),
+                  );
+                },
+                icon: Image.asset('images/icon_user.png')),
           )
         ],
       ),
       backgroundColor: Colors.white,
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-                stream: _articles.snapshots(),
-                builder: (_, snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
-                        children: snapshot.data!.docs
-                            .map((DocumentSnapshot document) {
-                      Map<String, dynamic> data =
-                          document.data() as Map<String, dynamic>;
-                      return ItemCard(
-                        author: data['author'],
-                        title: data['title'],
-                        published: data['published'],
-                        description: data['description'],
-                        image: data['image'],
-                        urlArtikel: data['url'],
-                        id: document.id,
-                      );
-                    }).toList());
-                  } else {
-                    return Shimmer.fromColors(
-                        baseColor: Colors.grey,
-                        highlightColor: Colors.white70,
-                        child: Column(children: [
-                          Container(
-                            width: double.infinity,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8.0),
-                              child: Card(
-                                  elevation: 1,
-                                  shadowColor: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Container(
-                                      child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        height: 160,
-                                        width: double.infinity,
-                                        margin: EdgeInsets.only(
-                                            top: 16, left: 16, right: 16),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Container(
-                                        height: 70,
-                                        margin: EdgeInsets.only(
-                                            left: 16, right: 16),
-                                      )
-                                    ],
-                                  ))),
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8.0),
-                              child: Card(
-                                  elevation: 1,
-                                  shadowColor: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Container(
-                                      child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        height: 160,
-                                        width: double.infinity,
-                                        margin: EdgeInsets.only(
-                                            top: 16, left: 16, right: 16),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Container(
-                                        height: 70,
-                                        margin: EdgeInsets.only(
-                                            left: 16, right: 16),
-                                      )
-                                    ],
-                                  ))),
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8.0),
-                              child: Card(
-                                  elevation: 1,
-                                  shadowColor: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Container(
-                                      child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        height: 160,
-                                        width: double.infinity,
-                                        margin: EdgeInsets.only(
-                                            top: 16, left: 16, right: 16),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Container(
-                                        height: 70,
-                                        margin: EdgeInsets.only(
-                                            left: 16, right: 16),
-                                      )
-                                    ],
-                                  ))),
-                            ),
-                          )
-                        ]));
-                  }
-                })
-          ],
-        ),
-      ),
+      body: HomePage(),
       drawer: DrawerMenu(),
     );
   }
