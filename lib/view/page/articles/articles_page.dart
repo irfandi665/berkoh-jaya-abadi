@@ -1,4 +1,3 @@
-import 'package:PostNews/about/onboarding_screen.dart';
 import 'package:PostNews/crud/homePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +12,15 @@ class ArticlesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    CollectionReference _articles = _firestore.collection('articles');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Articles",
-          style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold),
+          style:
+              TextStyle(color: Colors.blue[700], fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
@@ -27,13 +30,7 @@ class ArticlesPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 0),
             child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => OnboardingScreen()),
-                  );
-                },
-                icon: Image.asset('images/icon_user.png')),
+                onPressed: () {}, icon: Image.asset('images/icon_user.png')),
           )
         ],
       ),

@@ -2,37 +2,47 @@ import 'package:PostNews/crud/databaseServices.dart';
 import 'package:flutter/material.dart';
 
 class FormPage extends StatefulWidget {
-  String nama = "";
-  String author = "";
   String judul = "";
-  FormPage({Key? key, this.nama = "", this.author = "", this.judul = ""});
+  String deskripsi = "";
+  String author = "";
+  String tess = "";
+  FormPage(
+      {Key? key,
+      this.judul = "",
+      this.deskripsi = "",
+      this.author = "",
+      this.tess = ""});
 
   @override
   _FormPageState createState() => _FormPageState();
 }
 
 class _FormPageState extends State<FormPage> {
-  String nama = "";
+  String judul = "";
+  String deskripsi = "";
   String author = "";
 
-  String judul = "";
-  var txtnama = TextEditingController();
+  String tess = "";
+  var txtjudul = TextEditingController();
+  var txtdeskripsi = TextEditingController();
   var txtauthor = TextEditingController();
   @override
   void initState() {
     super.initState();
-    txtnama.text = widget.nama;
+    txtjudul.text = widget.judul;
+    txtdeskripsi.text = widget.deskripsi;
     txtauthor.text = widget.author;
-    nama = widget.nama;
-    author = widget.author;
     judul = widget.judul;
+    deskripsi = widget.deskripsi;
+    author = widget.author;
+    tess = widget.tess;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(judul),
+        title: Text(tess),
         actions: [
           PopupMenuButton(
             onSelected: popupMenuClick,
@@ -52,14 +62,14 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              controller: txtnama,
+              controller: txtjudul,
               decoration: InputDecoration(
-                  labelText: "nama",
+                  labelText: "judul",
                   border: OutlineInputBorder(),
-                  hintText: "Masukkan Berita"),
+                  hintText: "judul artikel"),
               onChanged: (value) {
                 setState(() {
-                  nama = value;
+                  judul = value;
                 });
               },
             ),
@@ -79,9 +89,25 @@ class _FormPageState extends State<FormPage> {
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: txtdeskripsi,
+              decoration: InputDecoration(
+                  labelText: "deskripsi",
+                  border: OutlineInputBorder(),
+                  hintText: "Masukkan Berita"),
+              onChanged: (value) {
+                setState(() {
+                  deskripsi = value;
+                });
+              },
+            ),
+          ),
           ElevatedButton(
               onPressed: () {
-                DatabaseServices.createUpdateMahasiswa(context, nama, author);
+                DatabaseServices.createUpdateMahasiswa(
+                    context, judul, deskripsi, author);
               },
               child: Text("Simpan"))
         ],
@@ -92,7 +118,7 @@ class _FormPageState extends State<FormPage> {
   void popupMenuClick(String value) {
     switch (value) {
       case 'Hapus':
-        DatabaseServices.deleteMahasiswa(widget.nama);
+        DatabaseServices.deleteMahasiswa(widget.judul);
         Navigator.pop(context);
         break;
       case 'Menu2':
