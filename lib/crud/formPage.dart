@@ -2,29 +2,29 @@ import 'package:PostNews/crud/databaseServices.dart';
 import 'package:flutter/material.dart';
 
 class FormPage extends StatefulWidget {
-  String nim = "";
   String nama = "";
+  String author = "";
   String judul = "";
-  FormPage({Key? key, this.nim = "", this.nama = "", this.judul = ""});
+  FormPage({Key? key, this.nama = "", this.author = "", this.judul = ""});
 
   @override
   _FormPageState createState() => _FormPageState();
 }
 
 class _FormPageState extends State<FormPage> {
-  String nim = "";
   String nama = "";
+  String author = "";
 
   String judul = "";
-  var txtNim = TextEditingController();
-  var txtNama = TextEditingController();
+  var txtnama = TextEditingController();
+  var txtauthor = TextEditingController();
   @override
   void initState() {
     super.initState();
-    txtNim.text = widget.nim;
-    txtNama.text = widget.nama;
-    nim = widget.nim;
+    txtnama.text = widget.nama;
+    txtauthor.text = widget.author;
     nama = widget.nama;
+    author = widget.author;
     judul = widget.judul;
   }
 
@@ -52,26 +52,11 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              controller: txtNim,
+              controller: txtnama,
               decoration: InputDecoration(
-                  labelText: "NIM",
+                  labelText: "nama",
                   border: OutlineInputBorder(),
-                  hintText: "Masukkan NIM"),
-              onChanged: (value) {
-                setState(() {
-                  nim = value;
-                });
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: txtNama,
-              decoration: InputDecoration(
-                  labelText: "Nama",
-                  border: OutlineInputBorder(),
-                  hintText: "Masukkan Nama"),
+                  hintText: "Masukkan Berita"),
               onChanged: (value) {
                 setState(() {
                   nama = value;
@@ -79,9 +64,24 @@ class _FormPageState extends State<FormPage> {
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: txtauthor,
+              decoration: InputDecoration(
+                  labelText: "author",
+                  border: OutlineInputBorder(),
+                  hintText: "Masukkan author"),
+              onChanged: (value) {
+                setState(() {
+                  author = value;
+                });
+              },
+            ),
+          ),
           ElevatedButton(
               onPressed: () {
-                DatabaseServices.createUpdateMahasiswa(context, nim, nama);
+                DatabaseServices.createUpdateMahasiswa(context, nama, author);
               },
               child: Text("Simpan"))
         ],
@@ -92,7 +92,7 @@ class _FormPageState extends State<FormPage> {
   void popupMenuClick(String value) {
     switch (value) {
       case 'Hapus':
-        DatabaseServices.deleteMahasiswa(widget.nim);
+        DatabaseServices.deleteMahasiswa(widget.nama);
         Navigator.pop(context);
         break;
       case 'Menu2':

@@ -30,23 +30,23 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (context, index) {
                           DocumentSnapshot documentSnapshot =
                               snapshot.data!.docs[index];
-                          print("${documentSnapshot["nama"]}");
+                          print("${documentSnapshot["author"]}");
                           return InkWell(
                             child: ListTile(
                               leading: Icon(
                                 Icons.person,
                                 size: 60,
                               ),
-                              title: Text(documentSnapshot["nama"]),
-                              subtitle: Text(documentSnapshot["NIM"]),
+                              title: Text(documentSnapshot["author"]),
+                              subtitle: Text(documentSnapshot["nama"]),
                             ),
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return FormPage(
                                   judul: "Ubah Data",
-                                  nim: documentSnapshot["NIM"],
                                   nama: documentSnapshot["nama"],
+                                  author: documentSnapshot["author"],
                                 );
                               }));
                             },
