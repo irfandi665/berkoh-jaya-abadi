@@ -1,3 +1,4 @@
+import 'package:PostNews/crud/formPage.dart';
 import 'package:flutter/material.dart';
 import 'package:PostNews/view/home.dart';
 import 'package:PostNews/view/page/articles/articles_page.dart';
@@ -24,8 +25,8 @@ class _BerandaState extends State<Beranda> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => FormAddArticle()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FormPage()));
         },
         child: Icon(Icons.note_add),
       ),

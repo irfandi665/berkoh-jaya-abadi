@@ -1,3 +1,4 @@
+import 'package:PostNews/about/onboarding_screen.dart';
 import 'package:PostNews/crud/homePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,13 @@ class ArticlesPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 0),
             child: IconButton(
-                onPressed: () {}, icon: Image.asset('images/icon_user.png')),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OnboardingScreen()));
+                },
+                icon: Image.asset('images/icon_user.png')),
           )
         ],
       ),

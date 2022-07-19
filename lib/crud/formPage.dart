@@ -1,16 +1,21 @@
 import 'package:PostNews/crud/databaseServices.dart';
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:date_field/date_field.dart';
+import 'package:intl/intl.dart';
 
 class FormPage extends StatefulWidget {
   String judul = "";
   String deskripsi = "";
   String author = "";
+  String date = '';
   String tess = "";
   FormPage(
       {Key? key,
       this.judul = "",
       this.deskripsi = "",
       this.author = "",
+      this.date = '',
       this.tess = ""});
 
   @override
@@ -21,19 +26,25 @@ class _FormPageState extends State<FormPage> {
   String judul = "";
   String deskripsi = "";
   String author = "";
+  String date = '';
 
   String tess = "";
   var txtjudul = TextEditingController();
-  var txtdeskripsi = TextEditingController();
   var txtauthor = TextEditingController();
+  var txtdate = TextEditingController();
+  var txtdeskripsi = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     txtjudul.text = widget.judul;
-    txtdeskripsi.text = widget.deskripsi;
     txtauthor.text = widget.author;
+    txtdate.text = widget.date;
+    txtdeskripsi.text = widget.deskripsi;
+
     judul = widget.judul;
     deskripsi = widget.deskripsi;
+    date = widget.date;
     author = widget.author;
     tess = widget.tess;
   }
@@ -42,7 +53,7 @@ class _FormPageState extends State<FormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(tess),
+        title: Text("Tambah Artikel"),
         actions: [
           PopupMenuButton(
             onSelected: popupMenuClick,
@@ -65,7 +76,8 @@ class _FormPageState extends State<FormPage> {
               controller: txtjudul,
               decoration: InputDecoration(
                   labelText: "judul",
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
                   hintText: "judul artikel"),
               onChanged: (value) {
                 setState(() {
@@ -80,7 +92,8 @@ class _FormPageState extends State<FormPage> {
               controller: txtauthor,
               decoration: InputDecoration(
                   labelText: "author",
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
                   hintText: "Masukkan author"),
               onChanged: (value) {
                 setState(() {
@@ -91,11 +104,31 @@ class _FormPageState extends State<FormPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
+            child: DateTimeFormField(
+              decoration: InputDecoration(
+                  hintText: "Date",
+                  labelText: "Date",
+                  prefixIcon: Icon(Icons.date_range_outlined),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0))),
+              mode: DateTimeFieldPickerMode.date,
+              dateFormat: DateFormat("yyyy-MM-dd"),
+              onDateSelected: (DateTime value) {
+                setState(() {
+                  String formatDate = DateFormat("yyyy-MM-dd").format(value);
+                  date = formatDate;
+                });
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: txtdeskripsi,
               decoration: InputDecoration(
                   labelText: "deskripsi",
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
                   hintText: "Masukkan Berita"),
               onChanged: (value) {
                 setState(() {
@@ -107,7 +140,7 @@ class _FormPageState extends State<FormPage> {
           ElevatedButton(
               onPressed: () {
                 DatabaseServices.createUpdateMahasiswa(
-                    context, judul, deskripsi, author);
+                    context, judul, deskripsi, author, date);
               },
               child: Text("Simpan"))
         ],

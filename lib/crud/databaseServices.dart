@@ -2,14 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class DatabaseServices {
-  static Future<void> createUpdateMahasiswa(BuildContext context, String judul,
-      String deskripsi, String author) async {
+  static Future<void> createUpdateMahasiswa(
+    BuildContext context,
+    String judul,
+    String deskripsi,
+    String author,
+    String date,
+  ) async {
     DocumentReference mahasiswaReference =
         FirebaseFirestore.instance.collection("mahasiswa").doc(judul);
     Map<String, dynamic> dataMahasiswa = {
       "judul": judul,
       "deskripsi": deskripsi,
-      "author": author
+      "author": author,
+      "date": date,
     };
     mahasiswaReference.set(dataMahasiswa).whenComplete(() {
       Navigator.pop(context);

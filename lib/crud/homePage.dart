@@ -1,6 +1,7 @@
 import 'package:PostNews/crud/formPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,9 +12,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Database App"),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -32,22 +30,100 @@ class _HomePageState extends State<HomePage> {
                               snapshot.data!.docs[index];
                           print("${documentSnapshot["judul"]}");
                           return InkWell(
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.person,
-                                size: 60,
+                            child: Container(
+                              width: 304,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16, top: 10),
+                                child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Container(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          height: 150,
+                                          margin: EdgeInsets.only(
+                                              left: 16, right: 16),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
+                                                child: Text(
+                                                  documentSnapshot["judul"],
+                                                  maxLines: 3,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color:
+                                                          HexColor('#4E3A55')),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 8, top: 4),
+                                                  child: Text(
+                                                    documentSnapshot[
+                                                        "deskripsi"],
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: HexColor(
+                                                            '#999CA0')),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10),
+                                                child: Text(
+                                                  documentSnapshot["date"] +
+                                                      " | " +
+                                                      documentSnapshot[
+                                                          "author"],
+                                                  maxLines: 3,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color:
+                                                          HexColor('#4E3A55')),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ))),
                               ),
-                              title: Text(documentSnapshot["judul"]),
-                              subtitle: Text(documentSnapshot["author"]),
                             ),
+
+                            // title: Text(documentSnapshot["judul"]),
+                            // subtitle: Text(documentSnapshot["author"]),
+
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return FormPage(
                                   tess: "Ubah Data",
                                   judul: documentSnapshot["judul"],
-                                  deskripsi: documentSnapshot["deskripsi"],
                                   author: documentSnapshot["author"],
+                                  date: documentSnapshot["date"],
+                                  deskripsi: documentSnapshot["deskripsi"],
                                 );
                               }));
                             },
@@ -59,15 +135,6 @@ class _HomePageState extends State<HomePage> {
                 })
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: "btn1",
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormPage(tess: "Tambah Data");
-          }));
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
