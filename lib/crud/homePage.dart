@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: snapshot.data!.docs.length,
@@ -74,7 +75,9 @@ class _HomePageState extends State<HomePage> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          bottom: 8, top: 4),
+                                                    bottom: 8,
+                                                    top: 5,
+                                                  ),
                                                   child: Text(
                                                     documentSnapshot[
                                                         "deskripsi"],
@@ -111,10 +114,6 @@ class _HomePageState extends State<HomePage> {
                                     ))),
                               ),
                             ),
-
-                            // title: Text(documentSnapshot["judul"]),
-                            // subtitle: Text(documentSnapshot["author"]),
-
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {

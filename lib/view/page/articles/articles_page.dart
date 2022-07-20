@@ -19,7 +19,7 @@ class ArticlesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Articles",
+          "Artikel",
           style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
