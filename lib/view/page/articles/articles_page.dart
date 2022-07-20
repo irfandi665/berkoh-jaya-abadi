@@ -20,8 +20,7 @@ class ArticlesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Articles",
-          style:
-              TextStyle(color: Colors.blue[700], fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,

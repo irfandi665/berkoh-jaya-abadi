@@ -54,6 +54,7 @@ class _FormPageState extends State<FormPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tambah Artikel"),
+        backgroundColor: Colors.red[700],
         actions: [
           PopupMenuButton(
             onSelected: popupMenuClick,
@@ -68,82 +69,92 @@ class _FormPageState extends State<FormPage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: txtjudul,
-              decoration: InputDecoration(
-                  labelText: "judul",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  hintText: "judul artikel"),
-              onChanged: (value) {
-                setState(() {
-                  judul = value;
-                });
-              },
-            ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: txtjudul,
+                  decoration: InputDecoration(
+                      labelText: "judul",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      hintText: "judul artikel"),
+                  onChanged: (value) {
+                    setState(() {
+                      judul = value;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: txtauthor,
+                  decoration: InputDecoration(
+                      labelText: "author",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      hintText: "Masukkan author"),
+                  onChanged: (value) {
+                    setState(() {
+                      author = value;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DateTimeFormField(
+                  decoration: InputDecoration(
+                      hintText: "Date",
+                      labelText: "Date",
+                      prefixIcon: Icon(Icons.date_range_outlined),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0))),
+                  mode: DateTimeFieldPickerMode.date,
+                  dateFormat: DateFormat("yyyy-MM-dd"),
+                  onDateSelected: (DateTime value) {
+                    setState(() {
+                      String formatDate =
+                          DateFormat("yyyy-MM-dd").format(value);
+                      date = formatDate;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: txtdeskripsi,
+                  decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 10.0),
+                      labelText: "deskripsi",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      hintText: "Masukkan Berita"),
+                  maxLines: 8,
+                  onChanged: (value) {
+                    setState(() {
+                      deskripsi = value;
+                    });
+                  },
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  DatabaseServices.createUpdateMahasiswa(
+                      context, judul, deskripsi, author, date);
+                },
+                child: Text("Simpan"),
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: txtauthor,
-              decoration: InputDecoration(
-                  labelText: "author",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  hintText: "Masukkan author"),
-              onChanged: (value) {
-                setState(() {
-                  author = value;
-                });
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: DateTimeFormField(
-              decoration: InputDecoration(
-                  hintText: "Date",
-                  labelText: "Date",
-                  prefixIcon: Icon(Icons.date_range_outlined),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0))),
-              mode: DateTimeFieldPickerMode.date,
-              dateFormat: DateFormat("yyyy-MM-dd"),
-              onDateSelected: (DateTime value) {
-                setState(() {
-                  String formatDate = DateFormat("yyyy-MM-dd").format(value);
-                  date = formatDate;
-                });
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: txtdeskripsi,
-              decoration: InputDecoration(
-                  labelText: "deskripsi",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  hintText: "Masukkan Berita"),
-              onChanged: (value) {
-                setState(() {
-                  deskripsi = value;
-                });
-              },
-            ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                DatabaseServices.createUpdateMahasiswa(
-                    context, judul, deskripsi, author, date);
-              },
-              child: Text("Simpan"))
-        ],
+        ),
       ),
     );
   }

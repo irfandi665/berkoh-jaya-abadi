@@ -13,7 +13,10 @@ class DrawerMenu extends StatelessWidget {
                 child: Image.asset('images/icon_user.png'),
               ),
               accountName: Text('Berkoh Jaya Abadi'),
-              accountEmail: Text('19103999@ittelkom-pwt.ac.id')),
+              accountEmail: Text('19103999@ittelkom-pwt.ac.id'),
+              decoration: BoxDecoration(
+                color: Colors.red[700],
+              )),
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Beranda'),

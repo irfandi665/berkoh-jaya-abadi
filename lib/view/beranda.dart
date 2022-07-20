@@ -29,6 +29,7 @@ class _BerandaState extends State<Beranda> {
               context, MaterialPageRoute(builder: (context) => FormPage()));
         },
         child: Icon(Icons.note_add),
+        backgroundColor: Colors.red,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -79,7 +80,7 @@ class _BerandaState extends State<Beranda> {
                       color: currentTab == 1 ? Colors.red : Colors.grey,
                     ),
                     Text(
-                      "Tambah Data",
+                      "Artikel",
                       style: TextStyle(
                           color: currentTab == 1 ? Colors.red : Colors.grey),
                     )
